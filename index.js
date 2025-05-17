@@ -9,7 +9,7 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 // Endpoint do WMS
-const CORPEM_ENDPOINT = process.env.CORPEM_ENDPOINT || 'http://webcorpem.no-ip.info:800/scripts/mh.dll/wc';
+const CORPEM_ENDPOINT = process.env.CORPEM_ENDPOINT || 'http://webcorpem.no-ip.info:37560/scripts/mh.dll/wc';
 
 // Token de autenticação
 const TOKEN_CP = process.env.TOKEN_CP || '6cnc3';
