@@ -1,0 +1,32 @@
+{
+  "CORPEM_ERP_DOC_ENT": {
+    "CGCCLIWMS": "07876967000180",
+    "CGCREM": "02457533000203",
+    "OBSRESDP": "N.F.: 459607",
+    "TPDESTNF": "2",
+    "DEV": "0",
+    "NUMNF": "459607",
+    "SERIENF": "2",
+    "DTEMINF": "17/03/2020",
+    "VLTOTALNF": "250",
+    "NUMEPEDCLI": "N.F. 459607",
+    "CHAVENF": "43190394516671000153550020004596071023377876",
+    "CHAVENF_DEV": "43190394516671000153550020004596071023377871",
+    "ITENS": [
+      {
+        "NUMSEQ": "1",
+        "CODPROD": "5100",
+        "QTPROD": "100",
+        "VLTOTPROD": "100",
+        "NUMSEQ_DEV": "1"
+      },
+      {
+        "NUMSEQ": "2",
+        "CODPROD": "5101",
+        "QTPROD": "100",
+        "VLTOTPROD": "150",
+        "NUMSEQ_DEV": "2"
+      }
+    ]
+  }
+} 
