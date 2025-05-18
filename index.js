@@ -187,9 +187,33 @@ app.post('/nfe', upload.single('xml'), async (req, res) => {
     // Etapa 2: Preparar e enviar a NF-e (código existente adaptado)
     console.log('Iniciando preparação para envio da NF-e ao WMS...');
 
-    // Forçar a Chave NF-e para o valor de teste que funcionou anteriormente
-    const chaveNFe = process.env.CHAVE_NFE_FIXA || "42250302457533000203550010000422761011740306"; // Permitir configurar via env var
-    console.log('CHAVE NF-e UTILIZADA (pode ser fixa via CHAVE_NFE_FIXA):', chaveNFe);
+    // Extrair a Chave NF-e dinamicamente do XML processado
+    let chaveNFeExtraida = '';
+    if (nfeProc && nfeProc.protNFe && nfeProc.protNFe.infProt && nfeProc.protNFe.infProt.chNFe) {
+      chaveNFeExtraida = nfeProc.protNFe.infProt.chNFe;
+      console.log('Chave NF-e extraída de protNFe.infProt.chNFe:', chaveNFeExtraida);
+    } else if (infNFe && infNFe.Id && typeof infNFe.Id === 'string' && infNFe.Id.startsWith('NFe')) {
+      chaveNFeExtraida = infNFe.Id.substring(3);
+      console.log('Chave NF-e extraída de infNFe.Id (removendo "NFe"):', chaveNFeExtraida);
+    } else if (infNFe && infNFe.Id && typeof infNFe.Id === 'string' && infNFe.Id.length === 44) {
+      // Fallback caso o ID não tenha o prefixo "NFe" mas tenha o tamanho correto
+      chaveNFeExtraida = infNFe.Id;
+      console.log('Chave NF-e extraída de infNFe.Id (sem prefixo, tamanho 44):', chaveNFeExtraida);
+    }
+
+    if (!chaveNFeExtraida || chaveNFeExtraida.length !== 44) {
+      console.error(`Erro: Não foi possível extrair uma Chave NF-e válida (44 dígitos) do XML. Chave encontrada: "${chaveNFeExtraida}"`);
+      // Limpa o arquivo XML da pasta uploads antes de retornar o erro
+      if (req.file && fs.existsSync(req.file.path)) {
+        fs.unlinkSync(req.file.path);
+      }
+      return res.status(400).json({ 
+        erro: 'Não foi possível extrair uma Chave NF-e válida (44 dígitos) do XML.',
+        chave_extraida: chaveNFeExtraida,
+        detalhes_cadastro_produtos: resultadosCadastroProdutos 
+      });
+    }
+    console.log('CHAVE NF-e UTILIZADA para envio ao WMS:', chaveNFeExtraida);
 
     let somaTotalItens = 0;
     const itensJSON_NFe = itemsXml.map((item, idx) => {
@@ -226,7 +250,7 @@ app.post('/nfe', upload.single('xml'), async (req, res) => {
         DTEMINF: formatarData(ide?.dhEmi || ''), // Data de emissão da NF-e
         VLTOTALNF: vltotalnfCalculado,
         NUMEPEDCLI: `N.F. ${ide?.nNF || ''}`, // Número do Pedido do Cliente
-        CHAVENF: chaveNFe, // Chave da NF-e (atualmente fixa)
+        CHAVENF: chaveNFeExtraida, // USA A CHAVE EXTRAÍDA DINAMICAMENTE
         CHAVENF_DEV: "", // Chave da NF-e de Devolução (vazio se não for devolução)
         ITENS: itensJSON_NFe
       }
