@@ -1,0 +1,77 @@
+{
+  "CORPEM_ERP_MERC": {
+    "CGCCLIWMS": "94516671000153",
+    "PRODUTOS": [
+      {
+        "CODPROD": "5100",
+        "NOMEPROD": "PRODUTO TESTE 1",
+        "IWS_ERP": "1",
+        "TPOLRET": "1",
+        "IAUTODTVEN": "0",
+        "QTDDPZOVEN": "",
+        "ILOTFAB": "0",
+        "IDTFAB": "0",
+        "IDTVEN": "0",
+        "INSER": "0",
+        "SEM_LOTE_CKO": "0",
+        "SEM_DTVEN_CKO": "0",
+        "CODFAB": "",
+        "NOMEFAB": "",
+        "CODGRU": "",
+        "NOMEGRU": "",
+        "CODPROD_FORN": "",
+        "NCM": "12345678",
+        "EMBALAGENS": [
+          {
+            "CODUNID": "UN",
+            "FATOR": "1",
+            "CODBARRA": "7898919447428",
+            "PESOLIQ": "",
+            "PESOBRU": "",
+            "ALT": "",
+            "LAR": "",
+            "COMP": "",
+            "VOL": "",
+            "IEMB_ENT": "1",
+            "IEMB_SAI": "1"
+          }
+        ]
+      },
+      {
+        "CODPROD": "5101",
+        "NOMEPROD": "PRODUTO TESTE 2",
+        "IWS_ERP": "1",
+        "TPOLRET": "1",
+        "IAUTODTVEN": "0",
+        "QTDDPZOVEN": "",
+        "ILOTFAB": "0",
+        "IDTFAB": "0",
+        "IDTVEN": "0",
+        "INSER": "0",
+        "SEM_LOTE_CKO": "0",
+        "SEM_DTVEN_CKO": "0",
+        "CODFAB": "",
+        "NOMEFAB": "",
+        "CODGRU": "",
+        "NOMEGRU": "",
+        "CODPROD_FORN": "",
+        "NCM": "87654321",
+        "EMBALAGENS": [
+          {
+            "CODUNID": "CX",
+            "FATOR": "1",
+            "CODBARRA": "7898919447429",
+            "PESOLIQ": "",
+            "PESOBRU": "",
+            "ALT": "",
+            "LAR": "",
+            "COMP": "",
+            "VOL": "",
+            "IEMB_ENT": "1",
+            "IEMB_SAI": "1"
+          }
+        ]
+      }
+    ]
+  }
+}
